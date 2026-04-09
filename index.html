@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Amira | Cuisine Libanaise Authentique à Granby</title>
+  <meta name="description" content="Restaurant Amira — Authentic Lebanese cuisine in the heart of Granby, QC. Shawarma, Falafel, Jarret d'Agneau, Poutine Libanaise. Dine-in, takeout & delivery. 4.1⭐ on Google." />
+  <meta name="keywords" content="restaurant libanais Granby, Lebanese restaurant Granby QC, shawarma Granby, falafel Granby, cuisine libanaise, Restaurant Amira Granby" />
+  <meta property="og:title" content="Restaurant Amira | Cuisine Libanaise Authentique à Granby" />
+  <meta property="og:description" content="Authentic Lebanese cuisine in the heart of Granby. Generous portions, great value, dine-in & delivery available." />
+  <meta property="og:type" content="restaurant" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       CSS CUSTOM PROPERTIES
+    ============================================= */
+    :root {
+      --red:    #8B1A1A;
+      --gold:   #C9933A;
+      --cream:  #F5ECD7;
+      --olive:  #4A5C3F;
+      --white:  #FDFAF4;
+      --dark:   #1C1209;
+      --gray:   #6B6560;
+      --border: rgba(201,147,58,0.25);
+
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body:    'Lato', system-ui, sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 2px 12px rgba(28,18,9,.08);
+      --shadow-md: 0 8px 32px rgba(28,18,9,.14);
+      --shadow-lg: 0 20px 60px rgba(28,18,9,.2);
+
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(1180px, 100% - 2.5rem);
+      margin-inline: auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 540px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 2rem;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: .92rem;
+      letter-spacing: .04em;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #6e1414;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139,26,26,.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border-color: var(--cream);
+    }
+    .btn-outline:hover {
+      background: var(--cream);
+      color: var(--dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+    }
+    .btn-gold:hover {
+      background: #a87628;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,147,58,.4);
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      padding: 1.4rem 0;
+    }
+
+    #navbar.scrolled {
+      background: rgba(28,18,9,.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0,0,0,.25);
+      padding: .9rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+
+    .nav-logo .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .nav-logo .logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .nav-logo .logo-text span {
+      display: block;
+      font-size: .65rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.85);
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-order {
+      background: var(--gold);
+      color: #fff !important;
+      padding: .5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+    }
+    .nav-order:hover { background: var(--red) !important; color: #fff !important; }
+    .nav-order::after { display: none !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: .3rem;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(28,18,9,.97);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      position: relative;
+      height: 100svh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1800&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.08);
+      transition: transform 8s ease;
+    }
+
+    #hero.loaded .hero-bg { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(28,18,9,.82) 0%,
+        rgba(139,26,26,.45) 50%,
+        rgba(28,18,9,.65) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(201,147,58,.2);
+      border: 1px solid rgba(201,147,58,.5);
+      backdrop-filter: blur(8px);
+      color: var(--gold);
+      padding: .4rem 1.1rem;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1.6rem;
+      animation: fadeDown .8s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 1.4rem;
+      animation: fadeUp .9s ease .15s both;
+    }
+
+    .hero-title em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,.82);
+      margin-bottom: 2.2rem;
+      max-width: 500px;
+      line-height: 1.65;
+      animation: fadeUp .9s ease .25s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      animation: fadeUp .9s ease .35s both;
+    }
+
+    /* Google Rating Badge */
+    .rating-badge {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2rem;
+      z-index: 3;
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      animation: fadeLeft .9s ease .5s both;
+    }
+
+    .rating-badge .google-g {
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #4285F4;
+    }
+
+    .rating-badge .rating-info { color: #fff; }
+    .rating-badge .stars { color: #FFC107; font-size: 1rem; letter-spacing: .05em; }
+    .rating-badge .score {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .rating-badge .count { font-size: .75rem; opacity: .75; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      color: rgba(255,255,255,.55);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      animation: bounce 2s ease infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
+    }
+
+    /* =============================================
+       HIGHLIGHTS BAR
+    ============================================= */
+    #highlights {
+      background: var(--red);
+      padding: 1.1rem 0;
+      overflow: hidden;
+    }
+
+    .highlights-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+    }
+
+    .highlight-item {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      padding: 0 2.5rem;
+      color: rgba(255,255,255,.9);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,.2);
+      flex-shrink: 0;
+    }
+
+    .highlight-item .hi-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    #about {
+      padding: 7rem 0;
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 200px;
+      height: 200px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      border: 5px solid var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-stat-badge {
+      position: absolute;
+      top: 2rem;
+      left: -2rem;
+      background: var(--red);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.4rem;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-stat-badge .stat-num {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1;
+    }
+
+    .about-stat-badge .stat-label {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .85;
+    }
+
+    .about-content .section-sub { max-width: 480px; margin-bottom: 2rem; }
+
+    .about-story {
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .value-card {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: 1rem;
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--gold);
+    }
+
+    .value-icon { font-size: 1.4rem; }
+
+    .value-card h4 {
+      font-family: var(--font-heading);
+      font-size: .95rem;
+      margin-bottom: .2rem;
+    }
+
+    .value-card p { font-size: .82rem; color: var(--gray); }
+
+    /* =============================================
+       MENU
+    ============================================= */
+    #menu {
+      padding: 7rem 0;
+      background: var(--cream);
+    }
+
+    .menu-header { text-align: center; margin-bottom: 3.5rem; }
+    .menu-header .section-sub { margin-inline: auto; }
+
+    /* Tabs */
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .tab-btn {
+      padding: .55rem 1.4rem;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--font-body);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+
+    /* Menu panels */
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .menu-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .menu-card-body { padding: 1.2rem; }
+
+    .menu-card-tags {
+      display: flex;
+      gap: .4rem;
+      margin-bottom: .6rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .2rem;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .18rem .55rem;
+      border-radius: 50px;
+      letter-spacing: .04em;
+    }
+
+    .tag-veg  { background: #d4edda; color: #155724; }
+    .tag-gf   { background: #fff3cd; color: #856404; }
+    .tag-sig  { background: rgba(139,26,26,.12); color: var(--red); }
+
+    .menu-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      margin-bottom: .35rem;
+    }
+
+    .menu-card p { font-size: .85rem; color: var(--gray); line-height: 1.6; }
+
+    .menu-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: .9rem;
+      padding-top: .9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .price {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* Salad bar */
+    .salad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .8rem;
+    }
+
+    .salad-item {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .85rem 1rem;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: .9rem;
+      transition: var(--transition);
+    }
+
+    .salad-item:hover {
+      border-color: var(--gold);
+      background: rgba(201,147,58,.07);
+    }
+
+    .salad-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .menu-note {
+      margin-top: 2rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(139,26,26,.07);
+      border-left: 4px solid var(--red);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: .9rem;
+      color: var(--gray);
+    }
+
+    .menu-note strong { color: var(--red); }
+
+    /* =============================================
+       REVIEWS
+    ============================================= */
+    #reviews {
+      padding: 7rem 0;
+      background: var(--dark);
+    }
+
+    .reviews-header { text-align: center; margin-bottom: 3.5rem; }
+    .reviews-header .section-title { color: #fff; }
+    .reviews-header .section-sub { color: rgba(255,255,255,.6); margin-inline: auto; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-md);
+      padding: 1.8rem;
+      transition: var(--transition);
+    }
+
+    .review-card:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(201,147,58,.4);
+    }
+
+    .review-stars { color: #FFC107; font-size: 1rem; margin-bottom: 1rem; letter-spacing: .05em; }
+
+    .review-text {
+      color: rgba(255,255,255,.82);
+      font-size: .92rem;
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+
+    .review-name { color: #fff; font-weight: 700; font-size: .88rem; }
+    .review-platform { color: rgba(255,255,255,.45); font-size: .75rem; }
+
+    .reviews-summary {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .summary-stat { text-align: center; }
+    .summary-stat .big { font-family: var(--font-heading); font-size: 2.8rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    .summary-stat .small { color: rgba(255,255,255,.55); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; margin-top: .3rem; }
+
+    /* =============================================
+       GALLERY
+    ============================================= */
+    #gallery {
+      padding: 7rem 0;
+      background: var(--white);
+    }
+
+    .gallery-header { text-align: center; margin-bottom: 3.5rem; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 240px);
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.07); }
+
+    .gi-1 { grid-column: span 5; }
+    .gi-2 { grid-column: span 4; }
+    .gi-3 { grid-column: span 3; }
+    .gi-4 { grid-column: span 3; }
+    .gi-5 { grid-column: span 5; }
+    .gi-6 { grid-column: span 4; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,.9);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: min(900px, 90vw);
+      max-height: 85vh;
+      border-radius: var(--radius-md);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,.15);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =============================================
+       ORDER ONLINE
+    ============================================= */
+    #order {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, var(--red) 0%, #5a0f0f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #order::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .order-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .order-content .section-title { color: #fff; }
+    .order-content .section-sub { color: rgba(255,255,255,.75); }
+
+    .order-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .order-feature {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      color: rgba(255,255,255,.85);
+      font-size: .92rem;
+    }
+
+    .of-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      flex-shrink: 0;
+    }
+
+    .order-card {
+      background: rgba(255,255,255,.09);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .order-card h3 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .order-card p { color: rgba(255,255,255,.7); font-size: .9rem; margin-bottom: 1.8rem; }
+
+    .doordash-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: #FF3008;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      transition: var(--transition);
+      margin-bottom: 1.2rem;
+    }
+
+    .doordash-logo:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+
+    .hours-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.8);
+      padding: .5rem 1.2rem;
+      border-radius: 50px;
+      font-size: .82rem;
+    }
+
+    /* =============================================
+       HOURS
+    ============================================= */
+    #hours {
+      padding: 6rem 0;
+      background: var(--cream);
+    }
+
+    .hours-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .hours-content .section-sub { margin-bottom: 2rem; }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hours-table tr:last-child { border-bottom: none; }
+
+    .hours-table td {
+      padding: .85rem .5rem;
+      font-size: .9rem;
+    }
+
+    .hours-table td:first-child {
+      font-weight: 700;
+      color: var(--dark);
+      width: 50%;
+    }
+
+    .hours-table td:last-child {
+      color: var(--gray);
+      text-align: right;
+    }
+
+    .hours-table tr.today td { color: var(--red); }
+    .hours-table tr.today td:first-child::after {
+      content: ' (Aujourd\'hui)';
+      font-size: .72rem;
+      color: var(--gold);
+    }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: #d4edda;
+      color: #155724;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .3rem .85rem;
+      border-radius: 50px;
+      margin-top: 1.5rem;
+    }
+
+    .open-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #28a745;
+      animation: pulse 1.5s ease infinite;
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
+
+    .cc-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .cc-label { font-size: .75rem; color: var(--gray); text-transform: uppercase; letter-spacing: .06em; }
+    .cc-value { font-weight: 700; font-size: .95rem; color: var(--dark); }
+
+    /* =============================================
+       CONTACT & MAP
+    ============================================= */
+    #contact {
+      padding: 7rem 0;
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .form-group label {
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: .03em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: .85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: .92rem;
+      color: var(--dark);
+      background: var(--cream);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .map-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      height: 420px;
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .map-address {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      margin-top: 1.2rem;
+      color: var(--gray);
+      font-size: .9rem;
+    }
+
+    .map-address .pin { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* =============================================
+       INSTAGRAM
+    ============================================= */
+    #instagram {
+      padding: 5rem 0;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .insta-header { margin-bottom: 2.5rem; }
+    .insta-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--gray);
+      font-size: 1rem;
+      margin-top: .5rem;
+    }
+
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: .6rem;
+      margin-bottom: 2rem;
+    }
+
+    .insta-item {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .insta-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .insta-item:hover img { transform: scale(1.1); }
+
+    .insta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(139,26,26,.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s ease;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .insta-item:hover .insta-overlay { opacity: 1; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: var(--dark);
+      padding: 4rem 0 1.5rem;
+      color: rgba(255,255,255,.65);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo-text {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: .4rem;
+    }
+
+    .footer-brand .tagline {
+      font-size: .85rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p { font-size: .85rem; line-height: 1.8; }
+
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { display: flex; flex-direction: column; gap: .65rem; }
+
+    .footer-col a {
+      font-size: .85rem;
+      color: rgba(255,255,255,.55);
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover { color: var(--gold); }
+
+    .payment-icons {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-top: .8rem;
+    }
+
+    .pay-badge {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.7);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .3rem .7rem;
+      border-radius: 4px;
+      letter-spacing: .04em;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: .78rem;
+    }
+
+    .footer-bottom-links { display: flex; gap: 1.5rem; }
+    .footer-bottom-links a { color: rgba(255,255,255,.4); }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    /* =============================================
+       FLOATING BUTTONS
+    ============================================= */
+    .floating-btns {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .float-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .float-btn:hover { transform: translateY(-3px) scale(1.08); }
+
+    .float-phone { background: var(--red); color: #fff; }
+    .float-wa    { background: #25D366; color: #fff; }
+
+    /* =============================================
+       NEWSLETTER
+    ============================================= */
+    #newsletter {
+      background: var(--olive);
+      padding: 4rem 0;
+    }
+
+    .nl-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nl-content .section-title { color: #fff; font-size: 1.8rem; }
+    .nl-content p { color: rgba(255,255,255,.7); font-size: .9rem; }
+
+    .nl-form {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    .nl-form input {
+      padding: .85rem 1.2rem;
+      border-radius: 50px;
+      border: none;
+      font-size: .9rem;
+      width: 280px;
+      font-family: var(--font-body);
+      outline: none;
+    }
+
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+    @keyframes fadeUp   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeLeft { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes bounce   { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    @keyframes pulse    { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+    @keyframes marquee  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .highlights-track { animation: marquee 28s linear infinite; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-images { display: none; }
+      .order-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .insta-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6 { grid-column: span 1; height: 200px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      .rating-badge { display: none; }
+      .about-values { grid-template-columns: 1fr; }
+      .hours-inner { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6 { grid-column: span 1; height: 170px; }
+      .insta-grid { grid-template-columns: repeat(3, 1fr); }
+      .nl-inner { flex-direction: column; }
+      .nl-form input { width: 100%; }
+      .reviews-summary { gap: 1.5rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .salad-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .section-title { font-size: 1.9rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6 { grid-column: span 1; height: 220px; }
+      .insta-grid { grid-template-columns: repeat(2, 1fr); }
+      .salad-grid { grid-template-columns: 1fr; }
+      .hero-ctas .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<script>
+  /* ── ADMIN DATA BOOT (runs before first paint) ───────────── */
+  (function () {
+    const raw = localStorage.getItem('restaurantAmiraData');
+    if (!raw) return;
+    try {
+      window.__siteData = JSON.parse(raw);
+      const d = window.__siteData;
+      const root = document.documentElement;
+      if (d.theme) {
+        ['red','gold','cream','olive','white','dark','gray'].forEach(k => {
+          if (d.theme[k]) root.style.setProperty('--' + k, d.theme[k]);
+        });
+      }
+      if (d.seo) {
+        if (d.seo.title) document.title = d.seo.title;
+        const dm = document.querySelector('meta[name="description"]');
+        if (dm && d.seo.description) dm.content = d.seo.description;
+        const km = document.querySelector('meta[name="keywords"]');
+        if (km && d.seo.keywords) km.content = d.seo.keywords;
+      }
+    } catch(e) { console.warn('Admin data parse error', e); }
+  })();
+</script>
+
+<body>
+
+  <!-- ========================================================
+       NAVIGATION
+  ======================================================== -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div id="logo-icon" class="logo-icon">🌿</div>
+        <div class="logo-text">
+          <span id="logo-name">Amira</span>
+          <span id="logo-subtext" style="display:block;font-size:.65rem;font-family:var(--font-body);font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)">Restaurant Libanais</span>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="nav-links-list">
+        <li><a href="#about">À Propos</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#hours">Horaires</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#order" class="nav-order">Commander</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about"   onclick="closeMobile()">À Propos</a>
+    <a href="#menu"    onclick="closeMobile()">Menu</a>
+    <a href="#gallery" onclick="closeMobile()">Galerie</a>
+    <a href="#order"   onclick="closeMobile()">Commander</a>
+    <a href="#hours"   onclick="closeMobile()">Horaires</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ========================================================
+       HERO
+  ======================================================== -->
+  <section id="hero">
+    <div id="hero-bg" class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <div id="hero-badge" class="hero-badge">🌿 Cuisine Libanaise Authentique depuis Granby</div>
+
+      <h1 id="hero-title" class="hero-title">
+        Goûtez<br>
+        <em>Le Liban</em><br>
+        à Granby
+      </h1>
+
+      <p id="hero-sub" class="hero-sub">
+        Recettes traditionnelles, portions généreuses et une chaleur qui vous fait sentir chez vous.
+        Venez vivre une expérience culinaire authentique au cœur de Granby.
+      </p>
+
+      <div class="hero-ctas">
+        <a id="hero-cta1" href="#menu" class="btn btn-primary">
+          <span>📋</span> Voir le Menu
+        </a>
+        <a id="hero-cta2" href="#order" class="btn btn-outline">
+          <span>🛵</span> Commander en Ligne
+        </a>
+      </div>
+    </div>
+
+    <!-- Google Rating -->
+    <div class="rating-badge">
+      <div class="google-g">G</div>
+      <div class="rating-info">
+        <div class="stars">★★★★☆</div>
+        <div id="rating-score" class="score">4.1 <span style="font-size:.8rem;opacity:.7">/5</span></div>
+        <div id="rating-count" class="count">580+ avis Google</div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">Défiler</div>
+  </section>
+
+  <!-- ========================================================
+       HIGHLIGHTS BAR
+  ======================================================== -->
+  <div id="highlights">
+    <div id="highlights-track" class="highlights-track">
+      <!-- duplicated for seamless loop -->
+      <div class="highlight-item"><span class="hi-icon">🫓</span> Pain Chaud Maison</div>
+      <div class="highlight-item"><span class="hi-icon">🌿</span> 15+ Salades Fraîches</div>
+      <div class="highlight-item"><span class="hi-icon">🛵</span> Livraison via DoorDash</div>
+      <div class="highlight-item"><span class="hi-icon">🌱</span> Options Végétariennes</div>
+      <div class="highlight-item"><span class="hi-icon">⭐</span> 4.1/5 — 580+ Avis</div>
+      <div class="highlight-item"><span class="hi-icon">🍵</span> Thé à la Menthe Offert</div>
+      <div class="highlight-item"><span class="hi-icon">🏡</span> Terrasse Extérieure</div>
+      <div class="highlight-item"><span class="hi-icon">💳</span> Visa · MC · Amex</div>
+      <!-- clone -->
+      <div class="highlight-item"><span class="hi-icon">🫓</span> Pain Chaud Maison</div>
+      <div class="highlight-item"><span class="hi-icon">🌿</span> 15+ Salades Fraîches</div>
+      <div class="highlight-item"><span class="hi-icon">🛵</span> Livraison via DoorDash</div>
+      <div class="highlight-item"><span class="hi-icon">🌱</span> Options Végétariennes</div>
+      <div class="highlight-item"><span class="hi-icon">⭐</span> 4.1/5 — 580+ Avis</div>
+      <div class="highlight-item"><span class="hi-icon">🍵</span> Thé à la Menthe Offert</div>
+      <div class="highlight-item"><span class="hi-icon">🏡</span> Terrasse Extérieure</div>
+      <div class="highlight-item"><span class="hi-icon">💳</span> Visa · MC · Amex</div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       ABOUT
+  ======================================================== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Images (hidden on small screens) -->
+        <div class="about-images reveal">
+          <img
+            class="about-img-main"
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80"
+            alt="Intérieur chaleureux du Restaurant Amira"
+          />
+          <img
+            class="about-img-accent"
+            src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&auto=format&fit=crop&q=80"
+            alt="Plats libanais frais"
+          />
+          <div class="about-stat-badge">
+            <span class="stat-num">4.1★</span>
+            <span class="stat-label">580+ Avis</span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="about-content">
+          <span id="about-section-label" class="section-label reveal">Notre Histoire</span>
+          <h2 id="about-title" class="section-title reveal reveal-delay-1">
+            Une Tradition<br><em>Familiale</em> Libanaise
+          </h2>
+          <p id="about-story-1" class="about-story reveal reveal-delay-2">
+            Au cœur de Granby, le Restaurant Amira est né d'une passion profonde pour la cuisine libanaise authentique.
+            Nous apportons sur votre table les saveurs riches et les recettes transmises de génération en génération —
+            des épices soigneusement sélectionnées, des ingrédients frais du marché, et une générosité qui témoigne
+            de l'âme de notre cuisine.
+          </p>
+          <p id="about-story-2" class="about-story reveal reveal-delay-3">
+            Ce qui rend Amira unique, c'est notre façon de marier traditions libanaises et saveurs québécoises locales,
+            créant une expérience culinaire unique dans la région. Des portions généreuses, un accueil chaleureux —
+            voilà notre promesse.
+          </p>
+
+          <div id="about-values-grid" class="about-values reveal reveal-delay-4">
+            <div class="value-card">
+              <div class="value-icon">🌿</div>
+              <div>
+                <h4>Fraîcheur</h4>
+                <p>Ingrédients frais choisis chaque jour</p>
+              </div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🤝</div>
+              <div>
+                <h4>Générosité</h4>
+                <p>Portions généreuses, prix abordables</p>
+              </div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">❤️</div>
+              <div>
+                <h4>Communauté</h4>
+                <p>Engagés envers Granby et ses habitants</p>
+              </div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">🔥</div>
+              <div>
+                <h4>Authenticité</h4>
+                <p>Recettes libanaises traditionnelles</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       MENU
+  ======================================================== -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-header">
+        <span class="section-label reveal">Notre Menu</span>
+        <h2 class="section-title reveal reveal-delay-1">
+          Des Saveurs pour Chaque<br><em>Appétit</em>
+        </h2>
+        <p class="section-sub reveal reveal-delay-2">
+          Du shawarma grillé à la poutine libanaise, chaque plat est préparé avec soin et générosité.
+        </p>
+      </div>
+
+      <!-- Category Tabs -->
+      <div id="menu-tabs" class="menu-tabs reveal">
+        <button class="tab-btn active" onclick="showTab('assiettes', this)">🍽️ Assiettes</button>
+        <button class="tab-btn" onclick="showTab('trios', this)">🎁 Trios</button>
+        <button class="tab-btn" onclick="showTab('poutines', this)">🍟 Poutines</button>
+        <button class="tab-btn" onclick="showTab('salades', this)">🥗 Salades</button>
+        <button class="tab-btn" onclick="showTab('pizzas', this)">🍕 Pizzas</button>
+        <button class="tab-btn" onclick="showTab('desserts', this)">🍮 Desserts</button>
+        <button class="tab-btn" onclick="showTab('boissons', this)">🥤 Boissons</button>
+      </div>
+
+      <!-- ---- ASSIETTES ---- -->
+      <div class="menu-panel active" id="tab-assiettes">
+        <div class="menu-grid">
+
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&auto=format&fit=crop&q=80"
+              alt="Shish Taouk" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-sig">⭐ Populaire</span>
+              </div>
+              <h3>Shish Taouk</h3>
+              <p>Brochettes de poulet mariné grillé, tendres et parfumées aux épices orientales. Servi avec riz, pommes de terre et sauce à l'ail.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Grillé à la commande</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&auto=format&fit=crop&q=80"
+              alt="Shawarma" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-sig">⭐ Signature</span>
+              </div>
+              <h3>Shawarma</h3>
+              <p>Viande marinée tendre enroulée dans un pain pita chaud, avec légumes frais et sauce maison onctueuse.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Pita chaud maison</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80"
+              alt="Falafel" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-veg">🌱 Végétarien</span>
+                <span class="tag tag-gf">🌾 Sans gluten*</span>
+              </div>
+              <h3>Falafel</h3>
+              <p>Croquettes de pois chiches et herbes fraîches, frites à l'or. Accompagnées de sauce tahini et crudités.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Option végane</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=80"
+              alt="Jarret d'Agneau" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-sig">🏆 Incontournable</span>
+              </div>
+              <h3>Jarret d'Agneau</h3>
+              <p>Notre plat signature ! Agneau braisé longuement jusqu'à tendreté absolue, nappé d'une sauce riche aux épices. Fondant en bouche.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--red)">⭐ Plat Signature</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=80"
+              alt="Tajine au poulet" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-gf">🌾 Sans gluten*</span>
+              </div>
+              <h3>Tajine au Poulet & Citron</h3>
+              <p>Poulet mijoté à la marocaine avec olives, citrons confits et épices. Une explosion de saveurs méditerranéennes.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Cuisson lente</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&auto=format&fit=crop&q=80"
+              alt="Poulet Grillé" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-gf">🌾 Sans gluten*</span>
+              </div>
+              <h3>Poulet Grillé</h3>
+              <p>Poulet entier ou demi, mariné aux épices libanaises et grillé à la perfection. Servi avec accompagnements au choix.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Grillé frais</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <p class="menu-note">
+          <strong>Supplément viande :</strong> +3,50 $ / +6,00 $ + taxes. *Sans gluten — précautions contre la contamination croisée prises. Informez-nous de vos allergies.
+        </p>
+      </div>
+
+      <!-- ---- TRIOS ---- -->
+      <div class="menu-panel" id="tab-trios">
+        <div class="menu-grid">
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&auto=format&fit=crop&q=80"
+              alt="Trio Libanais" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-sig">💰 Meilleure Valeur</span></div>
+              <h3>Trio Libanais</h3>
+              <p>Choisissez 3 de nos assiettes : Shish Taouk, Shawarma, Falafel ou Poulet Grillé. Inclus : 2 salades, riz, pommes de terre et pain.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">3 protéines au choix</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80"
+              alt="Trio Famille" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-sig">👨‍👩‍👧 Famille</span></div>
+              <h3>Trio Famille</h3>
+              <p>Formule familiale généreuse avec assortiment de nos meilleures spécialités. Idéal pour partager entre amis ou en famille.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Pour 2–3 personnes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&auto=format&fit=crop&q=80"
+              alt="Trio Végétarien" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-veg">🌱 Végétarien</span>
+                <span class="tag tag-sig">💰 Valeur</span>
+              </div>
+              <h3>Trio Végétarien</h3>
+              <p>Falafel, couscous aux légumes et salade libanaise. Un festin végétarien complet avec toute la générosité d'Amira.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">100% végétarien</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="menu-note">
+          <strong>Nos Trios</strong> sont servis avec 2 salades au choix parmi notre bar à salades de 15 options, riz, pommes de terre et pain pita chaud.
+        </p>
+      </div>
+
+      <!-- ---- POUTINES ---- -->
+      <div class="menu-panel" id="tab-poutines">
+        <div class="menu-grid">
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&auto=format&fit=crop&q=80"
+              alt="Poutine Libanaise" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-sig">🏆 Incontournable</span>
+              </div>
+              <h3>Poutine Libanaise</h3>
+              <p>Notre twist unique sur la classique québécoise ! Frites croustillantes, fromage en grains fondant, sauce libanaise maison aux épices orientales. Un must absolu.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--red)">⭐ Exclusivité Amira</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&auto=format&fit=crop&q=80"
+              alt="Poutine au Poulet" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-sig">❤️ Favori</span>
+              </div>
+              <h3>Poutine au Poulet</h3>
+              <p>Frites dorées, fromage en grains, poulet mariné grillé en morceaux et sauce dorée généreuse. Un repas complet à lui seul.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Poulet grillé maison</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="menu-note">
+          Nos poutines sont une fusion originale entre la tradition québécoise et les saveurs libanaises —
+          <strong>une expérience unique que vous ne trouverez nulle part ailleurs à Granby.</strong>
+        </p>
+      </div>
+
+      <!-- ---- SALADES ---- -->
+      <div class="menu-panel" id="tab-salades">
+        <p style="text-align:center;color:var(--gray);margin-bottom:2rem;font-size:.95rem;">
+          Choisissez parmi nos <strong style="color:var(--red)">15 salades fraîches</strong> préparées quotidiennement — incluses avec vos assiettes et trios.
+        </p>
+        <div class="salad-grid reveal">
+          <div class="salad-item"><div class="salad-dot"></div><span>Taboulé</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Salade Grecque</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Légumineuses</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Ratatouille</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Betteraves</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Couscous aux Légumes</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Brocoli à l'Estragon</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Pâtes Pesto & Feta</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Couscous à l'Orange</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Carottes aux Canneberges</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Fèves Germées</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Patates Grelots</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Céleri Rave</span></div>
+          <div class="salad-item"><div class="salad-dot"></div><span>Légumes Croquants au Cari</span></div>
+          <div class="salad-item" style="border-color:var(--gold);background:rgba(201,147,58,.07)"><div class="salad-dot" style="background:var(--red)"></div><span>+ Saison du jour</span></div>
+        </div>
+        <p class="menu-note" style="margin-top:1.5rem;">
+          <strong>🌱 Végétarien-friendly :</strong> La majorité de nos salades sont végétariennes et sans gluten.
+          Idéales pour accompagner ou composer un repas complet et équilibré.
+        </p>
+      </div>
+
+      <!-- ---- PIZZAS ---- -->
+      <div class="menu-panel" id="tab-pizzas">
+        <div class="menu-grid">
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80"
+              alt="Pizza Libanaise" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-sig">🍕 Spécialité</span></div>
+              <h3>Pizza Libanaise</h3>
+              <p>Pâte maison fine et croustillante, garnie d'ingrédients frais aux saveurs du Levant. Tomates, fromage, herbes et épices orientales.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Pâte maison</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop&q=80"
+              alt="Pizza Shawarma" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-sig">⭐ Populaire</span></div>
+              <h3>Pizza Shawarma</h3>
+              <p>Le meilleur de deux mondes — pizza croustillante garnie de notre shawarma maison, légumes frais et sauce à l'ail généreuse.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">Fusion Liban-Québec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&auto=format&fit=crop&q=80"
+              alt="Pizza Végétarienne" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-veg">🌱 Végétarienne</span>
+              </div>
+              <h3>Pizza Végétarienne Orientale</h3>
+              <p>Falafel émietté, légumes grillés, fromage fondant, olives et herbes fraîches sur pâte maison. Un festin sans viande.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+                <span style="font-size:.8rem;color:var(--gray)">100% végétarienne</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- DESSERTS ---- -->
+      <div class="menu-panel" id="tab-desserts">
+        <div class="menu-grid">
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=600&auto=format&fit=crop&q=80"
+              alt="Baklava" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-veg">🌱 Végétarien</span></div>
+              <h3>Baklava</h3>
+              <p>Feuillets de pâte filo croustillante, garnis de pistaches et noix, imbibés de sirop de fleur d'oranger. Le dessert libanais par excellence.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&auto=format&fit=crop&q=80"
+              alt="Maamoul" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-veg">🌱 Végétarien</span></div>
+              <h3>Maamoul & Douceurs Orientales</h3>
+              <p>Assortiment de pâtisseries libanaises traditionnelles : maamoul aux dattes, ma'amoul aux pistaches et autres douceurs de saison.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&auto=format&fit=crop&q=80"
+              alt="Dessert maison" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags"><span class="tag tag-sig">🍮 Du Jour</span></div>
+              <h3>Dessert Maison du Jour</h3>
+              <p>Demandez notre dessert du jour — préparé frais chaque matin selon les inspirations de notre cuisine. Surprise garantie !</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- BOISSONS ---- -->
+      <div class="menu-panel" id="tab-boissons">
+        <div class="menu-grid">
+          <div class="menu-card reveal">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?w=600&auto=format&fit=crop&q=80"
+              alt="Thé à la menthe" />
+            <div class="menu-card-body">
+              <div class="menu-card-tags">
+                <span class="tag tag-veg">🌱 Végétalien</span>
+                <span class="tag tag-sig">❤️ Tradition</span>
+              </div>
+              <h3>Thé Chaud à la Menthe</h3>
+              <p>Notre thé à la menthe fraîche sucré, servi bien chaud — une tradition libanaise d'accueil. Souvent offert lors de vos soirées chez nous.</p>
+              <div class="menu-card-footer">
+                <span class="price">Inclus</span>
+                <span style="font-size:.8rem;color:var(--gray)">Selon disponibilité</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-1">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
+              alt="Boissons gazeuses" />
+            <div class="menu-card-body">
+              <h3>Boissons Gazeuses</h3>
+              <p>Coca-Cola, Sprite, Fanta, Canada Dry, Diet Coke et plus. En cannette ou bouteille — la touche fraîche pour compléter votre repas.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card reveal reveal-delay-2">
+            <img class="menu-card-img"
+              src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&auto=format&fit=crop&q=80"
+              alt="Jus et eau" />
+            <div class="menu-card-body">
+              <h3>Jus & Eau</h3>
+              <p>Jus de fruits naturels, eau minérale et eau pétillante. Rafraîchissants et naturels pour accompagner vos saveurs libanaises.</p>
+              <div class="menu-card-footer">
+                <span class="price">Prix du marché</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /container -->
+  </section>
+
+  <!-- ========================================================
+       REVIEWS
+  ======================================================== -->
+  <section id="reviews">
+    <div class="container">
+      <div class="reviews-header">
+        <span class="section-label reveal">Avis Clients</span>
+        <h2 class="section-title reveal reveal-delay-1">Ce Que Disent<br><em style="color:var(--gold)">Nos Visiteurs</em></h2>
+        <p class="section-sub reveal reveal-delay-2">Des expériences authentiques partagées par nos clients satisfaits.</p>
+      </div>
+
+      <div class="reviews-grid">
+
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Jarret d'Agneau — le meilleur. Viande ultra-tendre avec une sauce incroyable.
+            Un must à essayer absolument si vous venez à Granby !"
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">M</div>
+            <div>
+              <div class="review-name">Michel R.</div>
+              <div class="review-platform">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Nuit à Granby — portion incroyable avec deux viandes, 2 salades, pommes de terre, riz et sauce à l'ail.
+            Très impressionné par la générosité des portions !"
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">S</div>
+            <div>
+              <div class="review-name">Sophie T.</div>
+              <div class="review-platform">TripAdvisor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "C'était une soirée pluvieuse et le serveur nous a apporté du pain chaud et du thé à la menthe sucré chaud.
+            Un accueil qui vient du cœur."
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">A</div>
+            <div>
+              <div class="review-name">Anne-Marie L.</div>
+              <div class="review-platform">TripAdvisor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Un endroit où je dois aller chaque fois que je suis à Granby.
+            Prix très raisonnables et qualité constante. Ma famille adore !"
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">J</div>
+            <div>
+              <div class="review-name">Jean-François B.</div>
+              <div class="review-platform">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">
+            "La Poutine Libanaise est une révélation — je n'aurais jamais imaginé que ces deux cuisines
+            se marieraient aussi bien. Délicieux et original !"
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">C</div>
+            <div>
+              <div class="review-name">Carole M.</div>
+              <div class="review-platform">Facebook</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Meilleur shawarma de la région sans hésitation. Le pain est toujours chaud,
+            les ingrédients frais. Service rapide et souriant. On reviendra !"
+          </p>
+          <div class="review-author">
+            <div class="review-avatar">P</div>
+            <div>
+              <div class="review-name">Pierre-Luc V.</div>
+              <div class="review-platform">Google Reviews</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="reviews-summary">
+        <div class="summary-stat reveal">
+          <div class="big">4.1★</div>
+          <div class="small">Note Google</div>
+        </div>
+        <div class="summary-stat reveal reveal-delay-1">
+          <div class="big">580+</div>
+          <div class="small">Avis Vérifiés</div>
+        </div>
+        <div class="summary-stat reveal reveal-delay-2">
+          <div class="big">90%</div>
+          <div class="small">Recommandent</div>
+        </div>
+        <div class="summary-stat reveal reveal-delay-3">
+          <div class="big">10+</div>
+          <div class="small">Ans d'Expérience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       GALLERY
+  ======================================================== -->
+  <section id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <span class="section-label reveal">Galerie</span>
+        <h2 class="section-title reveal reveal-delay-1">Nos Plats &amp; Notre<br><em>Ambiance</em></h2>
+      </div>
+
+      <div class="gallery-grid reveal">
+        <div class="gallery-item gi-1" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80" alt="Cuisine libanaise" />
+        </div>
+        <div class="gallery-item gi-2" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&auto=format&fit=crop&q=80" alt="Shawarma libanais" />
+        </div>
+        <div class="gallery-item gi-3" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&auto=format&fit=crop&q=80" alt="Falafel" />
+        </div>
+        <div class="gallery-item gi-4" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=800&auto=format&fit=crop&q=80" alt="Desserts orientaux" />
+        </div>
+        <div class="gallery-item gi-5" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80" alt="Ambiance restaurant" />
+        </div>
+        <div class="gallery-item gi-6" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&auto=format&fit=crop&q=80" alt="Salade fraîche" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <!-- ========================================================
+       ORDER ONLINE
+  ======================================================== -->
+  <section id="order">
+    <div class="container">
+      <div class="order-inner">
+        <div class="order-content">
+          <span class="section-label" style="color:rgba(255,255,255,.6)">Commander</span>
+          <h2 class="section-title reveal">
+            Livraison à Votre<br><em style="color:var(--gold)">Porte</em>
+          </h2>
+          <p class="section-sub reveal reveal-delay-1">
+            Commandez en ligne via DoorDash et recevez vos plats libanais préférés directement chez vous à Granby.
+          </p>
+
+          <div class="order-features reveal reveal-delay-2">
+            <div class="order-feature">
+              <div class="of-icon">⏰</div>
+              <span>Disponible 11h00 – 20h45 (dernière commande)</span>
+            </div>
+            <div class="order-feature">
+              <div class="of-icon">📍</div>
+              <span>Livraison dans la région de Granby</span>
+            </div>
+            <div class="order-feature">
+              <div class="of-icon">🚗</div>
+              <span>Ramassage en restaurant également disponible</span>
+            </div>
+            <div class="order-feature">
+              <div class="of-icon">💳</div>
+              <span>Paiement sécurisé Visa, Mastercard, Amex</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-card reveal reveal-delay-2">
+          <div style="font-size:3rem;margin-bottom:1rem;">🛵</div>
+          <h3>Commander Maintenant</h3>
+          <p>Rejoignez des centaines de Granbyens qui commandent régulièrement leurs plats libanais préférés.</p>
+
+          <a href="https://www.doordash.com" target="_blank" rel="noopener" class="doordash-logo">
+            <span>🔴</span> Commander via DoorDash
+          </a>
+
+          <br />
+
+          <div style="margin-top:1rem;">
+            <a href="tel:+14509910808" style="color:rgba(255,255,255,.7);font-size:.88rem;text-decoration:underline;">
+              Ou appelez le (450) 991-0808
+            </a>
+          </div>
+
+          <div style="margin-top:1.2rem;">
+            <span class="hours-pill">⏰ Livraison : 11h00 – 20h45</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       HOURS & CONTACT CARDS
+  ======================================================== -->
+  <section id="hours">
+    <div class="container">
+      <div class="hours-inner">
+        <div class="hours-content">
+          <span class="section-label reveal">Horaires</span>
+          <h2 class="section-title reveal reveal-delay-1">Nous Sommes<br><em>Ouverts</em></h2>
+          <p class="section-sub reveal reveal-delay-2">Venez nous rendre visite ou appelez-nous. Nous vous accueillons avec plaisir !</p>
+
+          <div id="open-status" class="open-badge" style="display:none">
+            <div class="open-dot"></div>
+            Ouvert maintenant
+          </div>
+
+          <table class="hours-table reveal reveal-delay-3">
+            <tbody id="hours-tbody">
+              <tr data-day="1,2" data-open="660" data-close="1200"><td>Lundi – Mardi</td><td>11h00 – 20h00</td></tr>
+              <tr data-day="3"   data-open="660" data-close="1260"><td>Mercredi</td><td>11h00 – 21h00</td></tr>
+              <tr data-day="4,5" data-open="660" data-close="1290"><td>Jeudi – Vendredi</td><td>11h00 – 21h30</td></tr>
+              <tr data-day="6"   data-open="660" data-close="1260"><td>Samedi</td><td>11h00 – 21h00</td></tr>
+              <tr data-day="0"   data-open="660" data-close="1260"><td>Dimanche</td><td>11h00 – 21h00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="contact-cards" class="contact-cards reveal reveal-delay-2">
+          <a id="contact-card-phone1" href="tel:+14509910808" class="contact-card">
+            <div class="cc-icon">📞</div>
+            <div>
+              <div class="cc-label">Téléphone Principal</div>
+              <div class="cc-value">+1 (450) 991-0808</div>
+            </div>
+          </a>
+
+          <a id="contact-card-phone2" href="tel:+14503756999" class="contact-card">
+            <div class="cc-icon">📱</div>
+            <div>
+              <div class="cc-label">Téléphone Secondaire</div>
+              <div class="cc-value">(450) 375-6999</div>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <div class="cc-icon">📍</div>
+            <div>
+              <div class="cc-label">Adresse</div>
+              <div class="cc-value">344 Rue Principale, Granby, QC J2G 2W4</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="cc-icon">🏡</div>
+            <div>
+              <div class="cc-label">Options</div>
+              <div class="cc-value">Salle à manger · Terrasse · À emporter · Livraison</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="cc-icon">💳</div>
+            <div>
+              <div class="cc-label">Paiements Acceptés</div>
+              <div class="cc-value">
+                Visa · MasterCard · American Express
+                <div class="payment-icons">
+                  <span class="pay-badge">VISA</span>
+                  <span class="pay-badge">MC</span>
+                  <span class="pay-badge">AMEX</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       CONTACT & MAP
+  ======================================================== -->
+  <section id="contact">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3.5rem;">
+        <span class="section-label reveal">Contact</span>
+        <h2 class="section-title reveal reveal-delay-1">Trouvez-Nous &amp;<br><em>Écrivez-Nous</em></h2>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Form -->
+        <div>
+          <form class="contact-form reveal" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">Prénom</label>
+                <input type="text" id="fname" placeholder="Jean" required />
+              </div>
+              <div class="form-group">
+                <label for="lname">Nom</label>
+                <input type="text" id="lname" placeholder="Tremblay" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Courriel</label>
+              <input type="email" id="email" placeholder="jean@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Sujet</label>
+              <select id="subject">
+                <option value="">Sélectionnez un sujet</option>
+                <option>Réservation de groupe</option>
+                <option>Question sur le menu</option>
+                <option>Commande traiteur</option>
+                <option>Commentaire / Suggestion</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Votre message ici…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+              <span>✉️</span> Envoyer le Message
+            </button>
+            <p id="form-success" style="display:none;color:var(--olive);text-align:center;font-weight:700;margin-top:.8rem;">
+              ✅ Message envoyé ! Nous vous répondrons sous peu.
+            </p>
+          </form>
+        </div>
+
+        <!-- Map -->
+        <div class="reveal reveal-delay-2">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2773.1234567890!2d-72.732!3d45.399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb7a22b7c8bf29b%3A0x47a7d5b5e5f01c84!2s344%20Rue%20Principale%2C%20Granby%2C%20QC%20J2G%202W4%2C%20Canada!5e0!3m2!1sfr!2sca!4v1234567890"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Carte Restaurant Amira Granby"
+              id="map-iframe"
+            ></iframe>
+          </div>
+          <div class="map-address">
+            <span class="pin">📍</span>
+            <div id="map-address-text">
+              <strong>Restaurant Amira</strong><br />
+              344 Rue Principale, Granby, QC J2G 2W4, Canada<br />
+              <a id="map-link" href="https://goo.gl/maps/example" target="_blank" rel="noopener"
+                style="color:var(--gold);font-size:.85rem;margin-top:.3rem;display:inline-block;">
+                Ouvrir dans Google Maps →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       INSTAGRAM
+  ======================================================== -->
+  <section id="instagram">
+    <div class="container">
+      <div class="insta-header">
+        <span class="section-label reveal">Suivez-Nous</span>
+        <h2 class="section-title reveal reveal-delay-1">Notre Cuisine<br><em>en Images</em></h2>
+        <div class="insta-handle reveal reveal-delay-2">
+          <span style="color:#E4405F;font-size:1.2rem;">📸</span>
+          @restaurantamira.granby
+        </div>
+      </div>
+
+      <div id="insta-grid" class="insta-grid reveal">
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&auto=format&fit=crop&q=80" alt="Post Instagram" />
+          <div class="insta-overlay">❤️</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="btn btn-outline"
+           style="color:var(--dark);border-color:var(--border);">
+          Voir plus sur Instagram →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       NEWSLETTER
+  ======================================================== -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="nl-inner">
+        <div class="nl-content">
+          <span class="section-label" style="color:rgba(255,255,255,.6)">Restez Informé</span>
+          <h2 class="section-title" style="color:#fff;font-size:1.8rem;">Offres Spéciales &amp; Nouveautés</h2>
+          <p>Abonnez-vous pour recevoir nos promotions et nouveautés en exclusivité.</p>
+        </div>
+        <form class="nl-form" onsubmit="subscribeNewsletter(event)">
+          <input type="email" placeholder="Votre adresse courriel…" required />
+          <button type="submit" class="btn btn-gold">S'abonner</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       FOOTER
+  ======================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">🌿 Restaurant Amira</div>
+          <div class="tagline">"Authentic Lebanese Cuisine in the Heart of Granby"</div>
+          <p>
+            Cuisine libanaise authentique depuis Granby, Québec.
+            Nous apportons les saveurs du Liban sur votre table avec générosité et passion.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="#menu">Notre Menu</a></li>
+            <li><a href="#gallery">Galerie Photos</a></li>
+            <li><a href="#reviews">Avis Clients</a></li>
+            <li><a href="#order">Commander en Ligne</a></li>
+            <li><a href="#contact">Nous Contacter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Horaires</h4>
+          <ul>
+            <li><a href="#hours">Lun–Mar : 11h–20h</a></li>
+            <li><a href="#hours">Mercredi : 11h–21h</a></li>
+            <li><a href="#hours">Jeu–Ven : 11h–21h30</a></li>
+            <li><a href="#hours">Sam : 11h–21h</a></li>
+            <li><a href="#hours">Dim : 11h–21h</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+14509910808">(450) 991-0808</a></li>
+            <li><a href="tel:+14503756999">(450) 375-6999</a></li>
+            <li><a href="#contact">344 Rue Principale</a></li>
+            <li><a href="#contact">Granby, QC J2G 2W4</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Restaurant Amira. Tous droits réservés.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Conditions d'utilisation</a>
+          <a href="#menu">Menu</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       FLOATING BUTTONS
+  ======================================================== -->
+  <div class="floating-btns">
+    <a id="float-phone-btn" href="tel:+14509910808" class="float-btn float-phone" title="Appeler Amira" aria-label="Appeler le restaurant">
+      📞
+    </a>
+    <a id="float-wa-btn" href="https://wa.me/14509910808" target="_blank" rel="noopener" class="float-btn float-wa" title="WhatsApp" aria-label="WhatsApp">
+      💬
+    </a>
+  </div>
+
+  <!-- ========================================================
+       JAVASCRIPT
+  ======================================================== -->
+  <script>
+    // ── Navbar scroll ──────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Hero ken-burns ─────────────────────────────────────────
+    document.getElementById('hero').classList.add('loaded');
+
+    // ── Hamburger ─────────────────────────────────────────────
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Intersection Observer (reveal animations) ──────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Menu tabs ──────────────────────────────────────────────
+    function showTab(id, btn) {
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+
+      // Re-trigger reveal for newly visible cards
+      document.querySelectorAll('#tab-' + id + ' .reveal').forEach(el => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), 80);
+      });
+    }
+
+    // ── Lightbox ───────────────────────────────────────────────
+    function openLightbox(item) {
+      const src  = item.querySelector('img').src;
+      const alt  = item.querySelector('img').alt;
+      const lb   = document.getElementById('lightbox');
+      const lbI  = document.getElementById('lightbox-img');
+      lbI.src    = src;
+      lbI.alt    = alt;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ── Today's hours highlight ────────────────────────────────
+    function highlightToday() {
+      const day = new Date().getDay(); // 0=Sun … 6=Sat
+      document.querySelectorAll('.hours-table tr[data-day]').forEach(row => {
+        const days = row.dataset.day.split(',').map(Number);
+        if (days.includes(day)) row.classList.add('today');
+      });
+
+      // Open/closed status
+      const now   = new Date();
+      const h     = now.getHours();
+      const m     = now.getMinutes();
+      const total = h * 60 + m;
+      const open  = 11 * 60;   // 11:00
+      // Determine closing time based on day
+      const closeMap = { 0: 21*60, 1: 20*60, 2: 20*60, 3: 21*60, 4: 21*60+30, 5: 21*60+30, 6: 21*60 };
+      const close = closeMap[day] || 21*60;
+      if (total >= open && total < close) {
+        document.getElementById('open-status').style.display = 'inline-flex';
+      }
+    }
+    highlightToday();
+
+    // ── Contact form ───────────────────────────────────────────
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById('form-success').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+    }
+
+    // ── Newsletter ─────────────────────────────────────────────
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      e.target.innerHTML = '<span style="color:#fff;font-weight:700;">✅ Merci ! Vous êtes abonné.</span>';
+    }
+
+    // ── Smooth scroll for all anchor links ─────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+  <!-- ========================================================
+       ADMIN DATA OVERRIDE ENGINE
+  ======================================================== -->
+  <script>
+  (function applyAdminData() {
+    const d = window.__siteData;
+    if (!d) return;
+
+    // ── helpers ────────────────────────────────────────────────
+    const $ = id => document.getElementById(id);
+    const setText = (id, val) => { const el = $(id); if (el && val !== undefined) el.textContent = val; };
+    const setHTML = (id, val) => { const el = $(id); if (el && val !== undefined) el.innerHTML = val; };
+    const setAttr = (id, attr, val) => { const el = $(id); if (el && val !== undefined) el.setAttribute(attr, val); };
+
+    // ── META / GENERAL ─────────────────────────────────────────
+    const g = d.meta || {};
+    if (g.logoEmoji)   setText('logo-icon', g.logoEmoji);
+    if (g.restaurantName) setText('logo-name', g.restaurantName);
+    if (g.logoSubtext) setText('logo-subtext', g.logoSubtext);
+    if (g.phone1)      setAttr('float-phone-btn', 'href', 'tel:' + g.phone1.replace(/\D/g,''));
+    if (g.whatsapp)    setAttr('float-wa-btn', 'href', 'https://wa.me/' + g.whatsapp.replace(/\D/g,''));
+    if (g.mapsEmbedSrc) setAttr('map-iframe', 'src', g.mapsEmbedSrc);
+    if (g.mapsLinkHref) setAttr('map-link', 'href', g.mapsLinkHref);
+    if (g.address)     { const el = $('map-address-text'); if (el) el.querySelector('strong') && (el.querySelector('strong').nextSibling.textContent = '\n' + g.address + '\n'); }
+
+    // ── HERO ────────────────────────────────────────────────────
+    const h = d.hero || {};
+    if (h.bgImageUrl)  { const el=$('hero-bg'); if(el) el.style.backgroundImage=`url('${h.bgImageUrl}')`; }
+    if (h.badgeText)   setText('hero-badge', h.badgeText);
+    if (h.titleLine1 || h.titleEmphasis || h.titleLine3) {
+      setHTML('hero-title',
+        `${h.titleLine1 || 'Goûtez'}<br><em>${h.titleEmphasis || 'Le Liban'}</em><br>${h.titleLine3 || 'à Granby'}`);
+    }
+    if (h.subtitle)    setText('hero-sub', h.subtitle);
+    if (h.cta1Label)   setHTML('hero-cta1', h.cta1Label);
+    if (h.cta1Href)    setAttr('hero-cta1', 'href', h.cta1Href);
+    if (h.cta2Label)   setHTML('hero-cta2', h.cta2Label);
+    if (h.cta2Href)    setAttr('hero-cta2', 'href', h.cta2Href);
+    if (h.ratingScore) setHTML('rating-score', h.ratingScore + ' <span style="font-size:.8rem;opacity:.7">/5</span>');
+    if (h.ratingCount) setText('rating-count', h.ratingCount);
+
+    // ── HIGHLIGHTS BAR ──────────────────────────────────────────
+    if (d.highlights && d.highlights.length) {
+      const track = $('highlights-track');
+      if (track) {
+        const html = [...d.highlights, ...d.highlights]
+          .map(i => `<div class="highlight-item"><span class="hi-icon">${i.icon}</span> ${i.text}</div>`).join('');
+        track.innerHTML = html;
+      }
+    }
+
+    // ── ABOUT ───────────────────────────────────────────────────
+    const a = d.about || {};
+    if (a.sectionLabel) setText('about-section-label', a.sectionLabel);
+    if (a.titleLine1 || a.titleEmphasis) {
+      setHTML('about-title',
+        `${a.titleLine1||'Une Tradition'}<br><em>${a.titleEmphasis||'Familiale'}</em> ${a.titleLine3||'Libanaise'}`);
+    }
+    if (a.story1) setText('about-story-1', a.story1);
+    if (a.story2) setText('about-story-2', a.story2);
+    if (a.values && a.values.length) {
+      const grid = $('about-values-grid');
+      if (grid) {
+        grid.innerHTML = a.values.map(v => `
+          <div class="value-card">
+            <div class="value-icon">${v.icon}</div>
+            <div><h4>${v.title}</h4><p>${v.desc}</p></div>
+          </div>`).join('');
+      }
+    }
+
+    // ── MENU ────────────────────────────────────────────────────
+    if (d.menu && d.menu.categories && d.menu.categories.length) {
+      const tabs   = $('menu-tabs');
+      const panels = document.querySelector('#menu .container');
+
+      if (tabs && panels) {
+        // Remove old panels
+        document.querySelectorAll('.menu-panel').forEach(p => p.remove());
+        // Rebuild tabs
+        tabs.innerHTML = d.menu.categories.map((cat, i) =>
+          `<button class="tab-btn${i===0?' active':''}" onclick="showTab('${cat.id}',this)">${cat.icon} ${cat.label}</button>`
+        ).join('');
+        // Rebuild panels
+        d.menu.categories.forEach((cat, i) => {
+          const div = document.createElement('div');
+          div.className = 'menu-panel' + (i===0?' active':'');
+          div.id = 'tab-' + cat.id;
+          if (cat.type === 'list') {
+            div.innerHTML = `
+              ${cat.introText ? `<p style="text-align:center;color:var(--gray);margin-bottom:2rem;font-size:.95rem;">${cat.introText}</p>` : ''}
+              <div class="salad-grid">
+                ${(cat.items||[]).map(item => `
+                  <div class="salad-item"><div class="salad-dot"></div><span>${item.name}</span></div>`).join('')}
+              </div>
+              ${cat.note ? `<p class="menu-note">${cat.note}</p>` : ''}`;
+          } else {
+            div.innerHTML = `
+              <div class="menu-grid">
+                ${(cat.items||[]).map(item => `
+                  <div class="menu-card">
+                    <img class="menu-card-img" src="${item.imageUrl||''}" alt="${item.imageAlt||item.name}" />
+                    <div class="menu-card-body">
+                      <div class="menu-card-tags">
+                        ${(item.tags||[]).map(t => `<span class="tag tag-${t.type}">${t.text}</span>`).join('')}
+                      </div>
+                      <h3>${item.name}</h3>
+                      <p>${item.description||''}</p>
+                      <div class="menu-card-footer">
+                        <span class="price">${item.price||''}</span>
+                        <span style="font-size:.8rem;color:var(--gray)">${item.priceNote||''}</span>
+                      </div>
+                    </div>
+                  </div>`).join('')}
+              </div>
+              ${cat.note ? `<p class="menu-note">${cat.note}</p>` : ''}`;
+          }
+          panels.appendChild(div);
+        });
+      }
+    }
+
+    // ── REVIEWS ─────────────────────────────────────────────────
+    if (d.reviews) {
+      const rv = d.reviews;
+      const grid = document.querySelector('.reviews-grid');
+      if (grid && rv.items && rv.items.length) {
+        grid.innerHTML = rv.items.map(r => `
+          <div class="review-card">
+            <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+            <p class="review-text">"${r.text}"</p>
+            <div class="review-author">
+              <div class="review-avatar">${(r.authorName||'?')[0].toUpperCase()}</div>
+              <div>
+                <div class="review-name">${r.authorName}</div>
+                <div class="review-platform">${r.platform}</div>
+              </div>
+            </div>
+          </div>`).join('');
+      }
+      const summary = document.querySelector('.reviews-summary');
+      if (summary && rv.summary && rv.summary.length) {
+        summary.innerHTML = rv.summary.map(s => `
+          <div class="summary-stat">
+            <div class="big">${s.value}</div>
+            <div class="small">${s.label}</div>
+          </div>`).join('');
+      }
+    }
+
+    // ── GALLERY ─────────────────────────────────────────────────
+    if (d.gallery && d.gallery.items && d.gallery.items.length) {
+      const grid = document.querySelector('.gallery-grid');
+      if (grid) {
+        const spans = ['gi-1','gi-2','gi-3','gi-4','gi-5','gi-6'];
+        grid.innerHTML = d.gallery.items.map((item, i) => `
+          <div class="gallery-item ${item.spanClass || spans[i % spans.length]}" onclick="openLightbox(this)">
+            <img src="${item.src}" alt="${item.alt||''}" />
+          </div>`).join('');
+      }
+    }
+
+    // ── HOURS ───────────────────────────────────────────────────
+    if (d.hours && d.hours.rows && d.hours.rows.length) {
+      const tbody = $('hours-tbody');
+      if (tbody) {
+        tbody.innerHTML = d.hours.rows.map(r => `
+          <tr data-day="${r.dayNums}" data-open="${r.openMin||660}" data-close="${r.closeMin||1260}">
+            <td>${r.dayLabel}</td><td>${r.hours}</td>
+          </tr>`).join('');
+        highlightToday(); // re-run with new data
+      }
+    }
+
+    // ── CONTACT CARDS ───────────────────────────────────────────
+    if (g.phone1Display || g.phone2Display || g.address) {
+      const p1 = $('contact-card-phone1');
+      if (p1 && g.phone1) { p1.href='tel:'+g.phone1.replace(/\D/g,''); const v=p1.querySelector('.cc-value'); if(v) v.textContent=g.phone1Display||g.phone1; }
+      const p2 = $('contact-card-phone2');
+      if (p2 && g.phone2) { p2.href='tel:'+g.phone2.replace(/\D/g,''); const v=p2.querySelector('.cc-value'); if(v) v.textContent=g.phone2Display||g.phone2; }
+    }
+
+    // ── INSTAGRAM ───────────────────────────────────────────────
+    if (d.instagram) {
+      const ig = d.instagram;
+      if (ig.handle) { const el=$('insta-handle-text'); if(el) el.textContent=ig.handle; }
+      if (ig.profileUrl) { const el=$('insta-profile-link'); if(el) el.href=ig.profileUrl; }
+      if (ig.images && ig.images.length) {
+        const grid=$('insta-grid');
+        if(grid) {
+          grid.innerHTML=ig.images.map(img=>`
+            <div class="insta-item">
+              <img src="${img.src}" alt="${img.alt||''}" />
+              <div class="insta-overlay">❤️</div>
+            </div>`).join('');
+        }
+      }
+    }
+
+    // ── Re-observe reveal elements ───────────────────────────────
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+
+  })();
+  </script>
+
+</body>
+</html>
